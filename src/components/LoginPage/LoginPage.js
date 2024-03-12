@@ -30,14 +30,14 @@ function LoginPage() {
                     }}
                     onSubmit={(values, { setSubmitting }) => {
                         RequestApis.authRequest(values).then((res) => {
-                        if (res.data) {
-                            localStorage.setItem('token', res.data);
-                            setShowStatus('Successfully logged in!');
-                            setLoggedIn(true);
-                            setSubmitting(false);
-                        }
+                            if (res.data) {
+                                localStorage.setItem('token', res.data);
+                                setShowStatus('Successfully logged in!');
+                                setLoggedIn(true);
+                                setSubmitting(false);
+                            }
                         }).catch((err) => {
-                            setShowStatus(err.response.data);
+                            setShowStatus(err.response && err.response.data);
                             setLoggedIn(false);
                             setSubmitting(false);
                         });
@@ -52,7 +52,7 @@ function LoginPage() {
                         handleSubmit,
                         isSubmitting
                     }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form className="login-form" onSubmit={handleSubmit}>
                         <TextField 
                             autoComplete='one-time-code'
                             label="*Email" 

@@ -6,7 +6,8 @@ module.exports = override(
   addWebpackAlias({
     "crypto": require.resolve("crypto-browserify"),
     "stream": require.resolve("stream-browserify"),
-    "util": require.resolve("util")
+    "util": require.resolve("util"),
+    "vm": require.resolve("vm-browserify")
   }),
   addWebpackPlugin(new webpack.ProvidePlugin({ process: processPolyfill }))
 );

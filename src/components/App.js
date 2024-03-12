@@ -32,32 +32,35 @@ function AppBarWithTabs() {
   return (
     <div style={{ position: 'relative' }}>
       <AppBar color='transparent'>
-        <Tabs 
-          value={location.pathname}
-          indicatorColor="primary"
-          textColor="primary"
-        >
-          {routes.map((route) => (
-            <Tab
-              value={route}
-              key={route}
-              component={RouterLink}
-              to={route}
-              label={route === '/' ? 'Home' : route.replace('/', '')}
-            />
-          ))}
-        </Tabs>
+        <div style={{ position: 'relative', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
+          <Tabs
+            // style={{ maxWidth: 1200, margin: '0 auto' }} 
+            value={location.pathname}
+            indicatorColor="primary"
+            textColor="primary"
+          >
+            {routes.map((route) => (
+              <Tab
+                value={route}
+                key={route}
+                component={RouterLink}
+                to={route}
+                label={route === '/' ? 'Home' : route.replace('/', '')}
+              />
+            ))}
+          </Tabs>
+          <Button 
+            style={{ position: 'absolute', right: 0, top: 6, marginRight: 30 }}
+            variant="outlined"
+            onClick={() => {
+              localStorage.removeItem('token');
+              window.location.href = '/login';
+            }}
+          >
+            Logout
+          </Button>
+        </div>
       </AppBar>
-      <Button 
-        style={{ position: 'absolute', right: 20, top: 20 }}
-        variant="outlined"
-        onClick={() => {
-          localStorage.removeItem('token');
-          window.location.href = '/login';
-        }}
-      >
-        Logout
-      </Button>
     </div>
   );
 }
