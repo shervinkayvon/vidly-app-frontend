@@ -30,7 +30,7 @@ function AddEditCustomerForm({ handleClose, row }) {
                         setSubmitting(false);
                     });
                 } else {
-                    RequestApis.setCustomer(values).then((res) => {
+                    RequestApis.addCustomer(values).then((res) => {
                         if (res.data) {
                             handleClose();
                             setSubmitting(false);

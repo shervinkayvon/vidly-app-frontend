@@ -27,7 +27,7 @@ function GenrePage() {
   const handleDeleteModalClose = () => setDeleteModalOpen(false);
   
   const columns = [
-      { field: 'name', headerName: 'Name', width: 500 }
+      { field: 'name', headerName: 'Name', width: 750 }
   ];
 
   useEffect(() => {
@@ -89,6 +89,7 @@ function GenrePage() {
             columns={columns} 
             handleMenuClick={handleMenuClick} 
             setRow={setRow}
+            sortByRow="name"
         />
     </div>
   );

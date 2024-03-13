@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import AddEditCustomerForm from "../../components/CustomersPage/shared/AddEditCustomerForm";
 import AddEditGenreForm from "../../components/GenresPage/shared/AddEditGenreForm";
+import AddEditMovieForm from "../../components/MoviesPage/shared/AddEditMovieForm";
 
 function AddEditModal({ open, handleClose, row, title }) {
     const isRowLoaded = _.isObject(row);
@@ -41,6 +42,7 @@ function AddEditModal({ open, handleClose, row, title }) {
                     <br/>
                     {title === 'Customer' && <AddEditCustomerForm handleClose={handleClose} row={row} />}
                     {title === 'Genre' && <AddEditGenreForm handleClose={handleClose} row={row} />}
+                    {title === 'Movie' && <AddEditMovieForm handleClose={handleClose} row={row} />}
                     <Button style={{ position: 'absolute', top: 15, right: 15 }} color='error' variant="outlined" onClick={handleClose}>Close</Button>
                 </Box>
             </Modal>

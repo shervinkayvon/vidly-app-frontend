@@ -27,9 +27,9 @@ function CustomersPage() {
   const handleDeleteModalClose = () => setDeleteModalOpen(false);
   
   const columns = [
-      { field: 'name', headerName: 'Name', width: 200 },
-      { field: 'phone', headerName: 'Phone', width: 150 },
-      { field: 'isGold', headerName: 'Is Gold', width: 150 }
+      { field: 'name', headerName: 'Name', width: 300 },
+      { field: 'phone', headerName: 'Phone', width: 220 },
+      { field: 'isGold', headerName: 'Is Gold', width: 220 }
   ];
 
   useEffect(() => {
@@ -91,6 +91,7 @@ function CustomersPage() {
             columns={columns} 
             handleMenuClick={handleMenuClick} 
             setRow={setRow}
+            sortByRow="name"
         />
     </div>
   );

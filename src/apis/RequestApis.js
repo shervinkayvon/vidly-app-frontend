@@ -17,10 +17,10 @@ export default class RequestApis {
     }
 
     static getCustomers() {
-        return axiosInstance.get(CUSTOMERS);
+        return axiosInstance.get(`${CUSTOMERS}?page=1&pageSize=100`);
     }
 
-    static setCustomer(customer) {
+    static addCustomer(customer) {
         return axiosInstance.post(CUSTOMERS, customer);
     }
 
@@ -40,7 +40,7 @@ export default class RequestApis {
         return axiosInstance.get(GENRES);
     }
 
-    static setGenre(genre) {
+    static addGenre(genre) {
         return axiosInstance.post(GENRES, genre);
     }
 
@@ -52,5 +52,31 @@ export default class RequestApis {
 
     static deleteGenre(genre) {
         return axiosInstance.delete(`${GENRES}/${genre.id}`);
+    }
+
+    static getMovies() {
+        return axiosInstance.get(MOVIES);
+    }
+
+    static addMovie(movie) {
+        return axiosInstance.post(MOVIES, {
+            title: movie.title,
+            genreId: movie.genre,
+            numberInStock: movie.numberInStock,
+            dailyRentalRate: movie.dailyRentalRate
+        });
+    }
+
+    static editMovie(movie) {
+        return axiosInstance.put(`${MOVIES}/${movie.id}`, {
+            title: movie.title,
+            genreId: movie.genre,
+            numberInStock: movie.numberInStock,
+            dailyRentalRate: movie.dailyRentalRate
+        });
+    }
+
+    static deleteMovie(movie) {
+        return axiosInstance.delete(`${MOVIES}/${movie.id}`);
     }
 }

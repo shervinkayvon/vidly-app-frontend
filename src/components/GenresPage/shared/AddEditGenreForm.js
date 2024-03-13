@@ -28,7 +28,7 @@ function AddEditGenreForm({ handleClose, row }) {
                         setSubmitting(false);
                     });
                 } else {
-                    RequestApis.setGenre(values).then((res) => {
+                    RequestApis.addGenre(values).then((res) => {
                         if (res.data) {
                             handleClose();
                             setSubmitting(false);

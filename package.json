@@ -26,6 +26,7 @@
     "react-number-format": "^5.3.3",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2",

@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import DeleteCustomerForm from "../../components/CustomersPage/shared/DeleteCustomerForm";
 import DeleteGenreForm from "../../components/GenresPage/shared/DeleteGenreForm";
+import DeleteMovieForm from "../../components/MoviesPage/shared/DeleteMovieForm";
 
 function DeleteModal({ open, handleClose, row, title }) {
     const isRowLoaded = _.isObject(row);
@@ -41,6 +42,7 @@ function DeleteModal({ open, handleClose, row, title }) {
                     <br/>
                     {title === 'Customer' &&<DeleteCustomerForm handleClose={handleClose} row={row} />}
                     {title === 'Genre' && <DeleteGenreForm handleClose={handleClose} row={row} />}
+                    {title === 'Movie' && <DeleteMovieForm handleClose={handleClose} row={row} />}
                     <Button style={{ position: 'absolute', top: 15, right: 15 }} color='error' variant="outlined" onClick={handleClose}>Close</Button>
                 </Box>
             </Modal>
