@@ -2,6 +2,10 @@ import { axiosInstance } from "./api";
 
 const AUTH = '/api/auth';
 const CUSTOMERS = '/api/customers';
+const GENRES = '/api/genres';
+const MOVIES = '/api/movies';
+const RENTALS = '/api/rentals';
+const USERS = '/api/users';
 
 export default class RequestApis {
     static authRequest(credentials) {
@@ -26,5 +30,27 @@ export default class RequestApis {
             phone: customer.phone,
             isGold: customer.isGold
         });
+    }
+
+    static deleteCustomer(customer) {
+        return axiosInstance.delete(`${CUSTOMERS}/${customer.id}`);
+    }
+
+    static getGenres() {
+        return axiosInstance.get(GENRES);
+    }
+
+    static setGenre(genre) {
+        return axiosInstance.post(GENRES, genre);
+    }
+
+    static editGenre(genre) {
+        return axiosInstance.put(`${GENRES}/${genre.id}`, {
+            name: genre.name
+        });
+    }
+
+    static deleteGenre(genre) {
+        return axiosInstance.delete(`${GENRES}/${genre.id}`);
     }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 function HomePage() {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Welcome to Vidly!</h1>
         </div>
     );
 }

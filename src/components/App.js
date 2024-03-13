@@ -11,6 +11,7 @@ import UsersPage from "./UsersPage/UsersPage";
 import GenresPage from "./GenresPage/GenresPage";
 import MoviesPage from "./MoviesPage/MoviesPage";
 import './App.css';
+import logo from '../assets/vidly-logo.png';
 
 function AppBarWithTabs() {
   const location = useLocation();
@@ -26,15 +27,16 @@ function AppBarWithTabs() {
   ];
 
   if (location.pathname === '/login') {
-    return null; // Do not render the AppBar and Tabs on the login page
+    return null;
   }
 
   return (
     <div style={{ position: 'relative' }}>
       <AppBar color='transparent'>
         <div style={{ position: 'relative', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
+          <img style={{ position: 'absolute', left: 10, top: 4, width: 40 }} src={logo} alt="logo" />
           <Tabs
-            // style={{ maxWidth: 1200, margin: '0 auto' }} 
+            style={{ marginLeft: 65 }}
             value={location.pathname}
             indicatorColor="primary"
             textColor="primary"

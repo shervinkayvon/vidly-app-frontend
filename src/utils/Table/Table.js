@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Button } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import './Table.css';
 
 export default function DataTable({ data, columns, handleMenuClick, setRow }) {
     if (!data) {
-        return <div>Loading...</div>;
+        return <LinearProgress />;
     }
 
     const sortedData = [...data].sort((a, b) => {
@@ -28,12 +28,15 @@ export default function DataTable({ data, columns, handleMenuClick, setRow }) {
         {
             field: 'button',
             headerName: 'Actions',
+            sortable: false,
             width: 150,
             renderCell: (params) => (
                 <Button onClick={(e) => {
                     setRow(params.row);
                     handleMenuClick(e);
-                }}><MoreVertIcon /></Button>
+                }}>
+                    <MoreVertIcon />
+                </Button>
             ),
         },
     ];
@@ -47,14 +50,6 @@ export default function DataTable({ data, columns, handleMenuClick, setRow }) {
                         },
                         '& .MuiDataGrid-columnHeaderTitle': {
                             fontWeight: 'bold',
-                        },
-                        '& .MuiDataGrid-cell--withRenderer': {
-                            // position: 'absolute',
-                            right: 0
-                        },
-                        '& .MuiDataGrid-columnHeader:last-of-type': {
-                            // position: 'absolute',
-                            right: 0
                         }
                     }}
                     rows={sortedData}

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Switch } from '@mui/material';
 import { Formik } from 'formik';
 import _ from 'lodash';
+import { PatternFormat } from 'react-number-format';
 
-import RequestApis from '../../apis/RequestApis';
+import RequestApis from '../../../apis/RequestApis';
 
 function AddEditCustomerForm({ handleClose, row }) {
     const [showStatus, setShowStatus] = useState('');
@@ -64,7 +65,7 @@ function AddEditCustomerForm({ handleClose, row }) {
                 />
                 {errors.name && touched.name && errors.name}
                 <br/>
-                <TextField 
+                <PatternFormat 
                     autoComplete='one-time-code'
                     label="*Phone" 
                     variant="outlined"
@@ -74,6 +75,9 @@ function AddEditCustomerForm({ handleClose, row }) {
                     onBlur={handleBlur}
                     disabled={isSubmitting}
                     value={values.phone}
+                    customInput={TextField}
+                    format="(###) ###-####" // Move the format prop here
+                    mask="_"
                 />
                 {errors.phone && touched.phone && errors.phone}
                 <br/>
@@ -94,7 +98,7 @@ function AddEditCustomerForm({ handleClose, row }) {
                 >
                     Submit
                 </Button>
-                {showStatus && <p style={{ textAlign: 'center' }}>{showStatus}</p>}
+                {showStatus && <p style={{ textAlign: 'center', color: 'red' }}>{showStatus}</p>}
             </form>
         )}
         </Formik>

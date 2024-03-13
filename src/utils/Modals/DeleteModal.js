@@ -1,9 +1,13 @@
 import React from "react";
 import { Button, Modal, Box, Typography } from '@mui/material';
+import _ from 'lodash';
 
-import AddEditCustomerForm from "../../../components/CustomersPage/AddEditCustomerForm";
+import DeleteCustomerForm from "../../components/CustomersPage/shared/DeleteCustomerForm";
+import DeleteGenreForm from "../../components/GenresPage/shared/DeleteGenreForm";
 
-function ModalComponent({ open, handleClose, row }) {
+function DeleteModal({ open, handleClose, row, title }) {
+    const isRowLoaded = _.isObject(row);
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -32,10 +36,11 @@ function ModalComponent({ open, handleClose, row }) {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add Customer
+                        {`Delete ${title}`}
                     </Typography>
                     <br/>
-                    <AddEditCustomerForm handleClose={handleClose} row={row} />
+                    {title === 'Customer' &&<DeleteCustomerForm handleClose={handleClose} row={row} />}
+                    {title === 'Genre' && <DeleteGenreForm handleClose={handleClose} row={row} />}
                     <Button style={{ position: 'absolute', top: 15, right: 15 }} color='error' variant="outlined" onClick={handleClose}>Close</Button>
                 </Box>
             </Modal>
@@ -43,4 +48,4 @@ function ModalComponent({ open, handleClose, row }) {
     );
 }
 
-export default ModalComponent;
+export default DeleteModal;

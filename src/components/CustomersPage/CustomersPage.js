@@ -3,11 +3,13 @@ import { Button, Menu, MenuItem } from '@mui/material';
 
 import RequestApis from '../../apis/RequestApis';
 import Table from '../../utils/Table/Table';
-import Modal from '../../utils/Table/Modal/Modal';
+import AddEditModal from '../../utils/Modals/AddEditModal';
+import DeleteModal from '../../utils/Modals/DeleteModal';
 
 function CustomersPage() {
   const [customersData, setCustomersData] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [openAddEditModal, setAddEditModalOpen] = useState(false);
+  const [openDeleteModal, setDeleteModalOpen] = useState(false);
   const [row, setRow] = useState(null);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,8 +21,10 @@ function CustomersPage() {
     setAnchorEl(null);
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleAddEditModalOpen = () => setAddEditModalOpen(true);
+  const handleAddEditModalClose = () => setAddEditModalOpen(false);
+  const handleDeleteModalOpen = () => setDeleteModalOpen(true);
+  const handleDeleteModalClose = () => setDeleteModalOpen(false);
   
   const columns = [
       { field: 'name', headerName: 'Name', width: 200 },
@@ -29,7 +33,7 @@ function CustomersPage() {
   ];
 
   useEffect(() => {
-    if (!open) {
+    if (!openAddEditModal && !openDeleteModal) {
         RequestApis.getCustomers().then((res) => {
             const dataWithIds = res.data.map((row) => ({
               ...row,
@@ -41,18 +45,28 @@ function CustomersPage() {
             console.log(err);
           });
     }
-  }, [open]);
+  }, [openAddEditModal, openDeleteModal]);
 
   return (
     <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px 20px 0' }}>
             <h1>Customers</h1>
-            <Button variant="contained" onClick={handleOpen}>Add Customer</Button>
+            <Button variant="contained" onClick={() => {
+                handleAddEditModalOpen();
+                setRow(null);
+            }}>Add Customer</Button>
         </div>
-        <Modal
-            open={open}
-            handleClose={handleClose}
+        <AddEditModal
+            open={openAddEditModal}
+            handleClose={handleAddEditModalClose}
             row={row}
+            title="Customer"
+        />
+        <DeleteModal
+            open={openDeleteModal}
+            handleClose={handleDeleteModalClose}
+            row={row}
+            title="Customer"
         />
         <Menu
             id="basic-menu"
@@ -60,18 +74,17 @@ function CustomersPage() {
             open={openMenu}
             onClose={handleMenuClose}
             MenuListProps={{
-            'aria-labelledby': 'basic-button',
+                'aria-labelledby': 'basic-button',
             }}
         >
             <MenuItem onClick={() => {
-                setOpen(true);
+                handleAddEditModalOpen();
                 handleMenuClose();
             }}>Edit</MenuItem>
             <MenuItem onClick={() => {
-                // setOpen(true);
+                handleDeleteModalOpen();
                 handleMenuClose();
             }}>Delete</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
         </Menu>
         <Table 
             data={customersData} 
